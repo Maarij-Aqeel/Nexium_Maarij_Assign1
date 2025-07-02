@@ -1,6 +1,5 @@
 "use client";
 import quoteApi from "@/lib/quoteApi"
-import { useEffect, useState } from "react";
 
 const images=[
   '/images/aesthetic.jpg',
@@ -12,25 +11,16 @@ const images=[
 ]
 
 export default function HandleApiPage() {
-  const [bgimage,setBgimage]=useState("")
   const {quote,author}=quoteApi()
 
 
-  useEffect(() => {
-      const randomIndex = Math.floor(images.length * Math.random())
-      setBgimage(images[randomIndex])
-    
-    
-
-  }, []);
-
   
   return (
-    <div className="bg-cover items-center bg-center min-h-screen flex flex-col justify-center"style={{ backgroundImage:bgimage? `url(${bgimage})`:"none"  }}>
+    <div className="bg-cover items-center bg-center min-h-screen flex flex-col justify-center">
       <h1 className="text-2xl font-bold mb-4  text-center">Quote of the day</h1>
-      <div className="p-4 backdrop-blur-sm rounded-2xl bg-white/30 w-2/3 shadow-2xl">
-        <blockquote className="italic text-lg">"{quote}"</blockquote>
-        <p className="text-right mt-2 font-bold">— {author}</p>
+      <div className="w-2/3 bg-white/30 backdrop-blur-md border border-white/40 shadow-xl p-8  rounded-2xl ">
+      <blockquote className="text-2xl md:text-2xl font-serif italic text-gray-900 leading-relaxed">“{quote}”</blockquote>
+      <p className="text-right mt-4 text-lg text-gray-700 font-semibold">— {author}</p>
       </div>
     </div>
   );
