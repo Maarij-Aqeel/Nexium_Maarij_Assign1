@@ -1,3 +1,6 @@
+"use client"
+
+import { useEffect, useState } from "react";
 
 const images=[
   '/images/aesthetic.jpg',
@@ -8,10 +11,26 @@ const images=[
   '/images/watch_table.jpg',
 ]
 
-export default function random_image(){
-      
+export default function random_image({
+      children,
+}: {
+  children: React.ReactNode;
+}) {
+      const [bg_image,setBgImage]=useState("")
+
+      useEffect(()=>
+      {
         const randomIndex=Math.floor(images.length*Math.random())
+        setBgImage(images[randomIndex])
+      },[])
       
-      return images[randomIndex]
+      return (
+      <div
+      className="min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: `url(${bg_image})` }}
+    >
+      {children}
+    </div>
+      )
 
 }

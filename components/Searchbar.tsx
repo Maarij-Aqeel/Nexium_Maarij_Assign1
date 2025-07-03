@@ -60,7 +60,7 @@ export default function Search() {
           name="topic"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold text-lg">Topic</FormLabel>
+              <FormLabel className="font-bold text-2xl">Topic</FormLabel>
               <FormControl>
                 <Input
                   className="w-full md:w-2/3 px-4 py-2 rounded-full border border-gray-400 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm"
@@ -72,7 +72,7 @@ export default function Search() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+          <Button type="submit">Submit</Button>
       </form>
     </Form>
 
