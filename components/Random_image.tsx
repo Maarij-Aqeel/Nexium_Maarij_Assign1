@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 
 const images=[
-  '/images/aesthetic.jpg',
-  '/images/black_white.jpg',
-  '/images/blue_bg.jpg',
-  '/images/mug.jpg',
-  '/images/random.jpg',
-  '/images/watch_table.jpg',
+"/images/gradient1.jpg",
+"/images/gradient2.jpg",
+"/images/gradient3.jpg",
+"/images/gradient5.jpg",
+"/images/gradient7.jpg",
+"/images/gradient8.jpg",
+ 
 ]
 
 export default function random_image({

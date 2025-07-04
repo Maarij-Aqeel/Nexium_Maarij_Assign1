@@ -63,7 +63,8 @@ export default function Search() {
               <FormLabel className="font-bold text-2xl">Topic</FormLabel>
               <FormControl>
                 <Input
-                  className="w-full md:w-2/3 px-4 py-2 rounded-full border border-gray-400 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm"
+                  className="w-full md:w-2/3 px-4 py-2 rounded-full border border-gray-400 hover:ring-2 hover:ring-black
+                  hover:placeholder-black shadow-sm transition-all duration-500"
                   placeholder="Search by topic e.g., life, success, creativity"
                   {...field}
                 />
@@ -72,7 +73,10 @@ export default function Search() {
             </FormItem>
           )}
         />
-          <Button type="submit">Submit</Button>
+          <Button
+            className="bg-gray-700 text-white hover:bg-black border border-black hover:text-white rounded-md transition-colors duration-300">
+            Submit
+          </Button>
       </form>
     </Form>
 
@@ -87,10 +91,10 @@ export default function Search() {
               transition={{ duration: 0.6 }}
               className="absolute w-full text-center"
             >
-              <p className="text-2xl md:text-2xl font-serif italic text-gray-900 leading-relaxed">
+              <p className="text-4xl md:text-3xl font-serif italic text-gray-900 leading-relaxed">
                 “{quoteList[index].quote}”
               </p>
-              <p className="text-right mt-4 text-lg text-gray-700 font-semibold">
+              <p className="text-right mt-4 text-xl text-gray-700 font-semibold">
                 — {quoteList[index].author}
               </p>
             </motion.div>
