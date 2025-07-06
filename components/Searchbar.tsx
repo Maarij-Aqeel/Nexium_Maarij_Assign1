@@ -3,6 +3,8 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import quotes from "@/lib/quotes"
 
 import {
@@ -13,16 +15,15 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import {motion,AnimatePresence} from "framer-motion"
-import { useState,useEffect } from "react";
+
 
 const FormSchema = z.object({
   topic: z.string().min(1, "Topic is required"),
 });
 
-export default function Search() {
+export default function Searchbar({ setQuoteList }: {
+  setQuoteList: React.Dispatch<React.SetStateAction<{ quote: string; author: string }[]>>
+}) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -30,28 +31,12 @@ export default function Search() {
     },
   });
 
-  const [quoteList,setQuotelist]=useState<{ quote: string; author: string }[]>([]);
-  const [index,SetIndex]=useState(0)  
-   // Reset animation cycle when new quotes come in
-  useEffect(() => {
-    if (quoteList.length === 0) return;
-    SetIndex(0); // reset index
-
-    const interval = setInterval(() => {
-      SetIndex((prev) => (prev + 1) % quoteList.length);
-    }, 4000); // 4 seconds
-
-    return () => clearInterval(interval);
-  }, [quoteList]);
-
-  
   return (
-    <>
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => {
-          const result=quotes(data.topic)
-          setQuotelist(result)
+          const result = quotes(data.topic);
+          setQuoteList(result);
         })}
         className="w-2/3 space-y-6"
       >
@@ -73,35 +58,12 @@ export default function Search() {
             </FormItem>
           )}
         />
-          <Button
+         <Button
             className="bg-gray-700 text-white hover:bg-black border border-black hover:text-white rounded-md transition-colors duration-300">
             Submit
           </Button>
+          
       </form>
     </Form>
-
-   {quoteList.length > 0 && (
-        <div className="mt-10 relative h-40 overflow-hidden w-full md:w-2/3 mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={index}
-              initial={{ x: 300, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -300, opacity: 0 }}
-              transition={{ duration: 0.6 }}
-              className="absolute w-full text-center"
-            >
-              <p className="text-4xl md:text-3xl font-serif italic text-gray-900 leading-relaxed">
-                “{quoteList[index].quote}”
-              </p>
-              <p className="text-right mt-4 text-xl text-gray-700 font-semibold">
-                — {quoteList[index].author}
-              </p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      )}
-    </>
-
   );
 }
